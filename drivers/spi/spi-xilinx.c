@@ -154,7 +154,7 @@ static void xspi_read_rx_fifo_##size(struct xilinx_spi *xqspi)		\
 	for (i = 0; i < count; i += (size / 8)) {			\
 		data = readl_relaxed(xqspi->regs + XSPI_RXD_OFFSET);	\
 		if (xqspi->rx_ptr)					\
-			((type *)xqspi->rx_ptr)[i] = (type)data;	\
+			*(type *)&xqspi->rx_ptr[i] = (type)data;	\
 	}								\
 	xqspi->bytes_to_receive -= count;				\
 	if (xqspi->rx_ptr)						\
